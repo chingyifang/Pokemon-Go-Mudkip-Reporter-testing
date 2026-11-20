@@ -103,20 +103,17 @@
 <body>
 <div class="container">
 
-  <!-- 頂部功能按鈕列：異色切換 & 中英文切換 -->
   <div class="top-bar">
     <button class="top-btn" onclick="toggleShiny()" id="shiny-btn">✨ 異色預覽 (Shiny)</button>
     <button class="top-btn" onclick="toggleLang()" id="lang-btn">🌐 English</button>
   </div>
 
-  <!-- 標題與圖片區塊 -->
   <div class="header">
     <img id="mudkip-img" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/258.png" alt="Mudkip">
     <h1 id="title">💧 水躍魚 Mudkip (#258)</h1>
     <p id="subtitle">屬性：水 ｜ 豐緣地區御三家</p>
   </div>
 
-  <!-- 出沒與環境條件 -->
   <div class="card">
     <h2 id="spawn-heading">🌍 野生出沒與巢穴條件</h2>
     <div class="tag-grid">
@@ -140,7 +137,6 @@
     <p class="note" id="nest-note">💡 <strong>找巢穴技巧：</strong>遊戲地圖上顯示為「深綠色草地」的大型公園，每兩週四早上 08:00 會進行一次巢穴大遷徙，水躍魚屬於常見的公園巢穴寶可夢之一。</p>
   </div>
 
-  <!-- 100% IV CP 速查表 -->
   <div class="card">
     <h2 id="cp-heading">📊 100% IV (15/15/15) CP 速查</h2>
     <div class="filter-btns" id="filters"></div>
@@ -171,4 +167,131 @@
   const i18n = {
     zh: {
       langBtn: "🌐 English",
-      shinyBtn: isShiny ? "💧
+      title: "💧 水躍魚 Mudkip (#258)",
+      subtitle: "屬性：水 ｜ 豐緣地區御三家",
+      spawnHeading: "🌍 野生出沒與巢穴條件",
+      lblWeather: "☔ 天氣加成",
+      valWeather: "雨天（出沒率 & 等級提升）",
+      lblBiome: "🏞️ 常見生態系 / 巢穴",
+      valBiome: "公園綠地、河岸、湖泊、海灘",
+      lblEgg: "🥚 孵蛋與其他來源",
+      valEgg: "2km 蛋（依當季輪替）、水系火箭隊手下",
+      lblCandy: "🍬 進化糖果需求",
+      valCandy: "25 顆 → 沼躍魚<br>100 顆 → 巨沼怪",
+      nestNote: "💡 <strong>找巢穴技巧：</strong>遊戲地圖上顯示為「深綠色草地」的大型公園，每兩週四早上 08:00 會進行一次巢穴大遷徙，水躍魚屬於常見的公園巢穴寶可夢之一。",
+      cpHeading: "📊 100% IV (15/15/15) CP 速查",
+      thLv: "等級",
+      thSrc: "遭遇情境",
+      thCp: "100% IV CP",
+      pvpNote: "⚔️ <strong>巨沼怪 PVP 建議：</strong>超級聯盟 (CP 1500) 推薦 IV 為 <code>0 / 14 / 14</code>；高級聯盟 (CP 2500) 推薦 <code>0 / 14 / 13</code>（需搭配社群日限定招式「加農水炮」）。",
+      filters: [
+        { id: 'all', label: '全部顯示' },
+        { id: 'quest', label: '田野調查 (Lv.15)' },
+        { id: 'egg', label: '孵蛋 / 團體戰 (Lv.20)' },
+        { id: 'weather', label: '雨天加成 (Lv.25)' },
+        { id: 'wild', label: '野外最高 (Lv.30/35)' }
+      ],
+      cpData: [
+        { lv: "Lv.15", type: "quest", source: "田野調查 / 特殊調查獎勵", cp: 483 },
+        { lv: "Lv.20", type: "egg", source: "孵蛋 / 一般團體戰 / GBL獎勵", cp: 644 },
+        { lv: "Lv.25", type: "weather", source: "雨天加成團體戰 / 淨化後", cp: 806 },
+        { lv: "Lv.30", type: "wild", source: "一般野生最高等級", cp: 967 },
+        { lv: "Lv.35", type: "wild", source: "雨天加成野生最高等級", cp: 1047 }
+      ]
+    },
+    en: {
+      langBtn: "🌐 繁體中文",
+      title: "💧 Mudkip (#258)",
+      subtitle: "Type: Water ｜ Hoenn First Partner Pokémon",
+      spawnHeading: "🌍 Wild Spawns & Nest Conditions",
+      lblWeather: "☔ Weather Boost",
+      valWeather: "Rainy (Higher spawn rate & level)",
+      lblBiome: "🏞️ Common Biomes / Nests",
+      valBiome: "Parks, Rivers, Lakes, Beaches",
+      lblEgg: "🥚 Eggs & Other Sources",
+      valEgg: "2km Eggs (Seasonal), Water-type Team GO Rocket Grunts",
+      lblCandy: "🍬 Evolution Candy",
+      valCandy: "25 Candy → Marshtomp<br>100 Candy → Swampert",
+      nestNote: "💡 <strong>Nest Hunting Tip:</strong> Large parks marked as dark green areas on the in-game map rotate nests every two weeks (Thursday 00:00 UTC). Mudkip is a frequent nesting species.",
+      cpHeading: "📊 100% IV (15/15/15) CP Chart",
+      thLv: "Level",
+      thSrc: "Encounter Source",
+      thCp: "100% IV CP",
+      pvpNote: "⚔️ <strong>Swampert PVP IVs:</strong> Great League (1500 CP) Rank #1 is <code>0 / 14 / 14</code>; Ultra League (2500 CP) Rank #1 is <code>0 / 14 / 13</code> (Requires Legacy Move: Hydro Cannon).",
+      filters: [
+        { id: 'all', label: 'Show All' },
+        { id: 'quest', label: 'Field Research (Lv.15)' },
+        { id: 'egg', label: 'Egg / Raid (Lv.20)' },
+        { id: 'weather', label: 'Weather Boost (Lv.25)' },
+        { id: 'wild', label: 'Max Wild (Lv.30/35)' }
+      ],
+      cpData: [
+        { lv: "Lv.15", type: "quest", source: "Field Research / Special Research", cp: 483 },
+        { lv: "Lv.20", type: "egg", source: "Egg Hatch / Raid / GBL Reward", cp: 644 },
+        { lv: "Lv.25", type: "weather", source: "Weather-Boosted Raid / Purified", cp: 806 },
+        { lv: "Lv.30", type: "wild", source: "Max Non-Boosted Wild Spawn", cp: 967 },
+        { lv: "Lv.35", type: "wild", source: "Max Weather-Boosted Wild Spawn", cp: 1047 }
+      ]
+    }
+  };
+
+  function renderUI() {
+    const t = i18n[currentLang];
+    document.getElementById('lang-btn').innerText = t.langBtn;
+    document.getElementById('shiny-btn').innerText = isShiny
+      ? (currentLang === 'zh' ? "💧 一般配色 (Normal)" : "💧 Normal Color")
+      : (currentLang === 'zh' ? "✨ 異色預覽 (Shiny)" : "✨ Shiny Preview");
+    document.getElementById('title').innerText = t.title;
+    document.getElementById('subtitle').innerText = t.subtitle;
+    document.getElementById('spawn-heading').innerText = t.spawnHeading;
+    document.getElementById('lbl-weather').innerText = t.lblWeather;
+    document.getElementById('val-weather').innerText = t.valWeather;
+    document.getElementById('lbl-biome').innerText = t.lblBiome;
+    document.getElementById('val-biome').innerText = t.valBiome;
+    document.getElementById('lbl-egg').innerText = t.lblEgg;
+    document.getElementById('val-egg').innerHTML = t.valEgg;
+    document.getElementById('lbl-candy').innerText = t.lblCandy;
+    document.getElementById('val-candy').innerHTML = t.valCandy;
+    document.getElementById('nest-note').innerHTML = t.nestNote;
+    document.getElementById('cp-heading').innerText = t.cpHeading;
+    document.getElementById('th-lv').innerText = t.thLv;
+    document.getElementById('th-src').innerText = t.thSrc;
+    document.getElementById('th-cp').innerText = t.thCp;
+    document.getElementById('pvp-note').innerHTML = t.pvpNote;
+
+    const filterContainer = document.getElementById('filters');
+    filterContainer.innerHTML = t.filters.map(f => `
+      <button class="${currentFilter === f.id ? 'active' : ''}" onclick="setFilter('${f.id}')">${f.label}</button>
+    `).join('');
+
+    const tbody = document.getElementById('cp-body');
+    const filtered = currentFilter === 'all' ? t.cpData : t.cpData.filter(d => d.type === currentFilter);
+    tbody.innerHTML = filtered.map(row => `
+      <tr>
+        <td><strong>${row.lv}</strong></td>
+        <td>${row.source}</td>
+        <td class="cp-highlight">${row.cp}</td>
+      </tr>
+    `).join('');
+  }
+
+  function toggleLang() {
+    currentLang = currentLang === 'zh' ? 'en' : 'zh';
+    renderUI();
+  }
+
+  function toggleShiny() {
+    isShiny = !isShiny;
+    document.getElementById('mudkip-img').src = isShiny ? shinyImg : normalImg;
+    renderUI();
+  }
+
+  function setFilter(type) {
+    currentFilter = type;
+    renderUI();
+  }
+
+  renderUI();
+</script>
+</body>
+</html>
