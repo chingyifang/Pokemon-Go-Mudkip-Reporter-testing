@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>💧 水躍魚 (#258) 出沒與 IV/CP 速查表</title>
+  <title>💧 Mudkip (#258) Spawn & IV/CP Guide</title>
   <style>
     :root {
       --primary: #0284c7;
@@ -21,6 +21,24 @@
       line-height: 1.5;
     }
     .container { max-width: 540px; margin: auto; }
+    .top-bar {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+    .top-btn {
+      background: white;
+      color: var(--primary);
+      border: 1px solid #bae6fd;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+    }
+    .top-btn:hover { background: var(--primary-light); }
     .header {
       background: linear-gradient(135deg, #0284c7, #38bdf8);
       color: white;
@@ -30,8 +48,16 @@
       margin-bottom: 16px;
       box-shadow: 0 4px 12px rgba(2, 132, 199, 0.2);
     }
-    .header h1 { margin: 0; font-size: 22px; }
-    .header p { margin: 6px 0 0; font-size: 14px; opacity: 0.9; }
+    .header img {
+      width: 120px;
+      height: 120px;
+      object-fit: contain;
+      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
+      transition: transform 0.2s;
+    }
+    .header img:hover { transform: scale(1.08); }
+    .header h1 { margin: 6px 0 0; font-size: 22px; }
+    .header p { margin: 4px 0 0; font-size: 14px; opacity: 0.9; }
     .card {
       background: white;
       padding: 18px;
@@ -54,7 +80,7 @@
       border-left: 3px solid var(--primary);
     }
     .info-label { font-size: 12px; color: var(--muted); font-weight: bold; }
-    .info-val { font-size: 15px; font-weight: bold; margin-top: 2px; }
+    .info-val { font-size: 14px; font-weight: bold; margin-top: 2px; }
     .filter-btns { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
     .filter-btns button {
       background: var(--primary-light);
@@ -77,89 +103,72 @@
 <body>
 <div class="container">
 
+  <!-- 頂部功能按鈕列：異色切換 & 中英文切換 -->
+  <div class="top-bar">
+    <button class="top-btn" onclick="toggleShiny()" id="shiny-btn">✨ 異色預覽 (Shiny)</button>
+    <button class="top-btn" onclick="toggleLang()" id="lang-btn">🌐 English</button>
+  </div>
+
+  <!-- 標題與圖片區塊 -->
   <div class="header">
-    <h1>💧 水躍魚 Mudkip (#258)</h1>
-    <p>屬性：水 ｜ 豐緣地區御三家</p>
+    <img id="mudkip-img" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/258.png" alt="Mudkip">
+    <h1 id="title">💧 水躍魚 Mudkip (#258)</h1>
+    <p id="subtitle">屬性：水 ｜ 豐緣地區御三家</p>
   </div>
 
   <!-- 出沒與環境條件 -->
   <div class="card">
-    <h2>🌍 野生出沒與巢穴條件</h2>
+    <h2 id="spawn-heading">🌍 野生出沒與巢穴條件</h2>
     <div class="tag-grid">
       <div class="info-item">
-        <div class="info-label">☔ 天氣加成</div>
-        <div class="info-val">雨天（出沒率 & 等級提升）</div>
+        <div class="info-label" id="lbl-weather">☔ 天氣加成</div>
+        <div class="info-val" id="val-weather">雨天（出沒率 & 等級提升）</div>
       </div>
       <div class="info-item">
-        <div class="info-label">🏞️ 常見生態系 / 巢穴</div>
-        <div class="info-val">公園綠地、河岸、湖泊、海灘</div>
+        <div class="info-label" id="lbl-biome">🏞️ 常見生態系 / 巢穴</div>
+        <div class="info-val" id="val-biome">公園綠地、河岸、湖泊、海灘</div>
       </div>
       <div class="info-item">
-        <div class="info-label">🥚 孵蛋與其他來源</div>
-        <div class="info-val">2km 蛋（依當季輪替）、水系火箭隊手下</div>
+        <div class="info-label" id="lbl-egg">🥚 孵蛋與其他來源</div>
+        <div class="info-val" id="val-egg">2km 蛋（依當季輪替）、水系火箭隊手下</div>
       </div>
       <div class="info-item">
-        <div class="info-label">🍬 進化糖果需求</div>
-        <div class="info-val">25 顆 → 沼躍魚<br>100 顆 → 巨沼怪</div>
+        <div class="info-label" id="lbl-candy">🍬 進化糖果需求</div>
+        <div class="info-val" id="val-candy">25 顆 → 沼躍魚<br>100 顆 → 巨沼怪</div>
       </div>
     </div>
-    <p class="note">💡 <strong>找巢穴技巧：</strong>遊戲地圖上顯示為「深綠色草地」的大型公園，每兩週四早上 08:00 會進行一次巢穴大遷徙，水躍魚屬於常見的公園巢穴寶可夢之一。</p>
+    <p class="note" id="nest-note">💡 <strong>找巢穴技巧：</strong>遊戲地圖上顯示為「深綠色草地」的大型公園，每兩週四早上 08:00 會進行一次巢穴大遷徙，水躍魚屬於常見的公園巢穴寶可夢之一。</p>
   </div>
 
   <!-- 100% IV CP 速查表 -->
   <div class="card">
-    <h2>📊 100% IV (15/15/15) CP 速查</h2>
-    <div class="filter-btns" id="filters">
-      <button class="active" onclick="filterTable('all', this)">全部顯示</button>
-      <button onclick="filterTable('quest', this)">田野調查 (Lv.15)</button>
-      <button onclick="filterTable('egg', this)">孵蛋 / 團體戰 (Lv.20)</button>
-      <button onclick="filterTable('weather', this)">雨天加成 (Lv.25)</button>
-      <button onclick="filterTable('wild', this)">野外最高 (Lv.30/35)</button>
-    </div>
+    <h2 id="cp-heading">📊 100% IV (15/15/15) CP 速查</h2>
+    <div class="filter-btns" id="filters"></div>
 
     <table>
       <thead>
         <tr>
-          <th>等級</th>
-          <th>遭遇情境</th>
-          <th>100% IV CP</th>
+          <th id="th-lv">等級</th>
+          <th id="th-src">遭遇情境</th>
+          <th id="th-cp">100% IV CP</th>
         </tr>
       </thead>
       <tbody id="cp-body"></tbody>
     </table>
-    <p class="note">⚔️ <strong>巨沼怪 PVP 建議：</strong>超級聯盟 (CP 1500) 推薦 IV 為 <code>0 / 14 / 14</code>；高級聯盟 (CP 2500) 推薦 <code>0 / 14 / 13</code>（需搭配社群日限定招式「加農水炮」）。</p>
+    <p class="note" id="pvp-note">⚔️ <strong>巨沼怪 PVP 建議：</strong>超級聯盟 (CP 1500) 推薦 IV 為 <code>0 / 14 / 14</code>；高級聯盟 (CP 2500) 推薦 <code>0 / 14 / 13</code>（需搭配社群日限定招式「加農水炮」）。</p>
   </div>
 
 </div>
 
 <script>
-  const cpData = [
-    { lv: "Lv.15", type: "quest", source: "田野調查 / 特殊調查獎勵", cp: 483 },
-    { lv: "Lv.20", type: "egg", source: "孵蛋 / 一般團體戰 / GBL獎勵", cp: 644 },
-    { lv: "Lv.25", type: "weather", source: "雨天加成團體戰 / 淨化後", cp: 806 },
-    { lv: "Lv.30", type: "wild", source: "一般野生最高等級", cp: 967 },
-    { lv: "Lv.35", type: "wild", source: "雨天加成野生最高等級", cp: 1047 }
-  ];
+  let currentLang = 'zh';
+  let currentFilter = 'all';
+  let isShiny = false;
 
-  function renderTable(filter) {
-    const tbody = document.getElementById('cp-body');
-    const filtered = filter === 'all' ? cpData : cpData.filter(d => d.type === filter);
-    tbody.innerHTML = filtered.map(row => `
-      <tr>
-        <td><strong>${row.lv}</strong></td>
-        <td>${row.source}</td>
-        <td class="cp-highlight">${row.cp}</td>
-      </tr>
-    `).join('');
-  }
+  const normalImg = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/258.png";
+  const shinyImg = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/258.png";
 
-  function filterTable(type, btn) {
-    document.querySelectorAll('#filters button').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    renderTable(type);
-  }
-
-  renderTable('all');
-</script>
-</body>
-</html>
+  const i18n = {
+    zh: {
+      langBtn: "🌐 English",
+      shinyBtn: isShiny ? "💧
