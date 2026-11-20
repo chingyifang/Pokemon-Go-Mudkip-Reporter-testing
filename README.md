@@ -11,4 +11,4 @@ A lightweight, bilingual (Traditional Chinese / English) web tool built for *Pok
 * **📊 Interactive 100% IV CP Chart :** Filter 100% IV (15/15/15) CP values by encounter type (Field Research Lv.15, Egg/Raid Lv.20, Weather Boost Lv.25, Max Wild Lv.30/35) plus Swampert PVP IV tips.
 
 ## 🔗 Live Demo 
-👉 [Click here to open the guide][([https://chingyifang.github.io/Mudkip-Spawn-IV-Guide/](https://chingyifang.github.io/Pokemon-Go-Mudkip-Reporter-testing/))]
+👉 [Click here to open the guide][[([https://chingyifang.github.io/Mudkip-Spawn-IV-Guide/](https://chingyifang.github.io/Pokemon-Go-Mudkip-Reporter-testing/))]](https://chingyifang.github.io/PokemonGo-Mudkip-Dex-include-100-IV-CP/)
