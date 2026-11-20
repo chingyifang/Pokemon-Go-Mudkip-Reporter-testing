@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>💧 水躍魚 (#258) 出沒與 IV/CP 速查表</title>
+  <style>
+    :root {
+      --primary: #0284c7;
+      --primary-light: #e0f2fe;
+      --bg: #f0f9ff;
+      --text: #1e293b;
+      --muted: #64748b;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      margin: 0;
+      padding: 16px;
+      line-height: 1.5;
+    }
+    .container { max-width: 540px; margin: auto; }
+    .header {
+      background: linear-gradient(135deg, #0284c7, #38bdf8);
+      color: white;
+      padding: 20px;
+      border-radius: 14px;
+      text-align: center;
+      margin-bottom: 16px;
+      box-shadow: 0 4px 12px rgba(2, 132, 199, 0.2);
+    }
+    .header h1 { margin: 0; font-size: 22px; }
+    .header p { margin: 6px 0 0; font-size: 14px; opacity: 0.9; }
+    .card {
+      background: white;
+      padding: 18px;
+      border-radius: 12px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    .card h2 {
+      margin: 0 0 12px;
+      font-size: 17px;
+      color: var(--primary);
+      border-bottom: 2px solid var(--primary-light);
+      padding-bottom: 6px;
+    }
+    .tag-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .info-item {
+      background: #f8fafc;
+      padding: 10px;
+      border-radius: 8px;
+      border-left: 3px solid var(--primary);
+    }
+    .info-label { font-size: 12px; color: var(--muted); font-weight: bold; }
+    .info-val { font-size: 15px; font-weight: bold; margin-top: 2px; }
+    .filter-btns { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+    .filter-btns button {
+      background: var(--primary-light);
+      color: var(--primary);
+      border: none;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .filter-btns button.active { background: var(--primary); color: white; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; text-align: center; }
+    th { background: #f1f5f9; color: var(--muted); padding: 8px; font-weight: bold; }
+    td { padding: 8px; border-bottom: 1px solid #f1f5f9; }
+    .cp-highlight { font-weight: bold; color: #0369a1; font-size: 15px; }
+    .note { font-size: 12px; color: var(--muted); margin-top: 10px; }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <div class="header">
+    <h1>💧 水躍魚 Mudkip (#258)</h1>
+    <p>屬性：水 ｜ 豐緣地區御三家</p>
+  </div>
+
+  <!-- 出沒與環境條件 -->
+  <div class="card">
+    <h2>🌍 野生出沒與巢穴條件</h2>
+    <div class="tag-grid">
+      <div class="info-item">
+        <div class="info-label">☔ 天氣加成</div>
+        <div class="info-val">雨天（出沒率 & 等級提升）</div>
+      </div>
+      <div class="info-item">
+        <div class="info-label">🏞️ 常見生態系 / 巢穴</div>
+        <div class="info-val">公園綠地、河岸、湖泊、海灘</div>
+      </div>
+      <div class="info-item">
+        <div class="info-label">🥚 孵蛋與其他來源</div>
+        <div class="info-val">2km 蛋（依當季輪替）、水系火箭隊手下</div>
+      </div>
+      <div class="info-item">
+        <div class="info-label">🍬 進化糖果需求</div>
+        <div class="info-val">25 顆 → 沼躍魚<br>100 顆 → 巨沼怪</div>
+      </div>
+    </div>
+    <p class="note">💡 <strong>找巢穴技巧：</strong>遊戲地圖上顯示為「深綠色草地」的大型公園，每兩週四早上 08:00 會進行一次巢穴大遷徙，水躍魚屬於常見的公園巢穴寶可夢之一。</p>
+  </div>
+
+  <!-- 100% IV CP 速查表 -->
+  <div class="card">
+    <h2>📊 100% IV (15/15/15) CP 速查</h2>
+    <div class="filter-btns" id="filters">
+      <button class="active" onclick="filterTable('all', this)">全部顯示</button>
+      <button onclick="filterTable('quest', this)">田野調查 (Lv.15)</button>
+      <button onclick="filterTable('egg', this)">孵蛋 / 團體戰 (Lv.20)</button>
+      <button onclick="filterTable('weather', this)">雨天加成 (Lv.25)</button>
+      <button onclick="filterTable('wild', this)">野外最高 (Lv.30/35)</button>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>等級</th>
+          <th>遭遇情境</th>
+          <th>100% IV CP</th>
+        </tr>
+      </thead>
+      <tbody id="cp-body"></tbody>
+    </table>
+    <p class="note">⚔️ <strong>巨沼怪 PVP 建議：</strong>超級聯盟 (CP 1500) 推薦 IV 為 <code>0 / 14 / 14</code>；高級聯盟 (CP 2500) 推薦 <code>0 / 14 / 13</code>（需搭配社群日限定招式「加農水炮」）。</p>
+  </div>
+
+</div>
+
+<script>
+  const cpData = [
+    { lv: "Lv.15", type: "quest", source: "田野調查 / 特殊調查獎勵", cp: 483 },
+    { lv: "Lv.20", type: "egg", source: "孵蛋 / 一般團體戰 / GBL獎勵", cp: 644 },
+    { lv: "Lv.25", type: "weather", source: "雨天加成團體戰 / 淨化後", cp: 806 },
+    { lv: "Lv.30", type: "wild", source: "一般野生最高等級", cp: 967 },
+    { lv: "Lv.35", type: "wild", source: "雨天加成野生最高等級", cp: 1047 }
+  ];
+
+  function renderTable(filter) {
+    const tbody = document.getElementById('cp-body');
+    const filtered = filter === 'all' ? cpData : cpData.filter(d => d.type === filter);
+    tbody.innerHTML = filtered.map(row => `
+      <tr>
+        <td><strong>${row.lv}</strong></td>
+        <td>${row.source}</td>
+        <td class="cp-highlight">${row.cp}</td>
+      </tr>
+    `).join('');
+  }
+
+  function filterTable(type, btn) {
+    document.querySelectorAll('#filters button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderTable(type);
+  }
+
+  renderTable('all');
+</script>
+</body>
+</html>
